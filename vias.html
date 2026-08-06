@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Catálogo · Vías para Moto</title>
+
+<!-- Vista previa al compartir (WhatsApp, Messenger, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Catálogo · Vías para Moto | Motoshop">
+<meta property="og:description" content="Vías LED para moto, la mejor calidad y precio en Motoshop.">
+<meta property="og:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+<meta property="og:url" content="https://catalogo.motoshop-hn.com/vias.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catálogo · Vías para Moto | Motoshop">
+<meta name="twitter:description" content="Vías LED para moto, la mejor calidad y precio en Motoshop.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #101215;
+  --bg-deep: #05060a;
+  --steel: #9AA3AE;
+  --white: #F3F4F6;
+  --amber: #FF8A24;
+  --amber-dim: #B85F16;
+  --wa: #2FBF6E;
+  --msg: #4C8DFF;
+}
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ margin:0; padding:0; height:100%; background: var(--bg-deep); overscroll-behavior-y: contain; }
+body{ font-family: 'Inter', sans-serif; color: var(--white); }
+
+/* Top bar */
+.topbar{
+  position: fixed; top:0; left:0; right:0; z-index: 30;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 18px calc(14px + env(safe-area-inset-top)) 18px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  background: linear-gradient(to bottom, rgba(5,6,10,0.85), rgba(5,6,10,0));
+  pointer-events:none;
+}
+.topbar .brand{
+  font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.04em;
+  font-size: 15px; text-transform: uppercase; color: var(--white);
+}
+.topbar .brand span{ color: var(--amber); }
+.topbar .cat{
+  font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--steel);
+  border:1px solid rgba(154,163,174,0.35); padding: 4px 10px; border-radius: 999px;
+  background: rgba(16,18,21,0.5);
+}
+
+/* Carousel */
+.carousel{
+  height: 100dvh; width: 100%;
+  overflow-y: scroll; scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.slide{
+  position: relative; height: 100dvh; width: 100%;
+  scroll-snap-align: start; scroll-snap-stop: always;
+  display:flex; align-items:flex-end; justify-content:center;
+  overflow:hidden; background: #000;
+}
+.slide video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
+}
+.slide::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(to bottom, rgba(5,6,10,0) 45%, rgba(5,6,10,0.55) 70%, rgba(5,6,10,0.92) 100%);
+  pointer-events:none;
+}
+
+/* Progress dots */
+.dots{
+  position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+  display:flex; flex-direction:column; gap:7px; z-index: 30;
+}
+.dot{ width:5px; height:16px; border-radius:3px; background: rgba(243,244,246,0.25); transition: all .25s ease; }
+.dot.active{ background: var(--amber); height: 22px; }
+
+/* Footer tag */
+.tag{
+  position: relative; z-index: 20; width: 100%;
+  padding: 0 16px calc(22px + env(safe-area-inset-bottom)) 16px;
+}
+.tag-card{
+  position:relative;
+  background: linear-gradient(180deg, rgba(20,22,26,0.72), rgba(10,11,14,0.92));
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,138,36,0.25);
+  border-radius: 14px;
+  padding: 14px 16px 16px 16px;
+}
+.tag-card::before{
+  content:""; position:absolute; left:20px; right:20px; top:-1px; height:1px;
+  background-image: linear-gradient(to right, rgba(154,163,174,0.5) 50%, transparent 50%);
+  background-size: 8px 1px;
+}
+.tag-hole{
+  position:absolute; top:-8px; left:50%; transform: translateX(-50%);
+  width:16px; height:16px; border-radius:50%;
+  background: var(--bg-deep); border: 1px solid rgba(255,138,36,0.35);
+}
+.tag-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 6px; }
+.code-chip{
+  font-family:'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.03em;
+  color: var(--amber); background: rgba(255,138,36,0.1); border:1px solid rgba(255,138,36,0.35);
+  padding: 3px 9px; border-radius: 6px;
+}
+.stock{ font-size: 11px; color: var(--steel); font-family:'Inter'; }
+.name{
+  font-family:'Oswald', sans-serif; font-weight:600; font-size: 20px;
+  text-transform: uppercase; letter-spacing: 0.01em; margin: 2px 0 8px 0; color: var(--white);
+}
+.price-row{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 14px; }
+.price{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size: 26px; color: var(--white); }
+.price small{ font-size: 13px; color: var(--steel); font-weight:500; margin-right: 2px; }
+.actions{ display:flex; gap: 10px; }
+.btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  padding: 12px 10px; border-radius: 10px; font-weight:600; font-size: 13.5px;
+  text-decoration:none; border: none; font-family:'Inter';
+}
+.btn-wa{ background: var(--wa); color: #06210f; }
+.btn-msg{ background: var(--msg); color: #06152f; }
+.btn svg{ width:16px; height:16px; flex-shrink:0; }
+.hint{
+  position: fixed; left:0; right:0; bottom: 8px; text-align:center; z-index: 25;
+  font-size: 11px; color: rgba(243,244,246,0.55); pointer-events:none;
+  font-family:'Inter'; letter-spacing: 0.02em;
+}
+.hint.hide{ opacity: 0; transition: opacity .6s ease; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png" style="height:30px;width:auto;display:block;">
+  <div class="cat" id="catLabel">Vías para moto</div>
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="carousel" id="carousel"></div>
+<div class="hint" id="hint">↑ Desliza para ver más ↑</div>
+
+<script>
+/* =========================================================
+   PRODUCTOS
+   Para agregar uno nuevo, copia un bloque {...} y pégalo
+   dentro del arreglo. video = link directo a un .mp4
+========================================================= */
+const productos = [
+  { codigo: "DKG09000035", nombre: "VIA LED AM/AZ MODELO ZXD-92", precio: "205.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177032/WhatsApp_Video_2026-06-09_at_7.20.59_PM_z24w9g.mp4" },
+  { codigo: "DKG09000038", nombre: "VIA LED RUNNING AM/AZ ZXD-116", precio: "215.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177032/WhatsApp_Video_2026-06-09_at_7.18.28_PM_w8izbg.mp4" },
+  { codigo: "DKG09000025", nombre: "VIA LED AMARILLA RUNNING ZXD-09", precio: "175.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177032/WhatsApp_Video_2026-06-09_at_7.20.51_PM_rct78t.mp4" },
+  { codigo: "DKG09000063", nombre: "VIA LED RUNNING ZXD-05S AM/AZ", precio: "205.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177031/WhatsApp_Video_2026-06-09_at_7.19.37_PM_xvenya.mp4" },
+  { codigo: "DKG09000037", nombre: "VIA LED AM/AZ RACING ZXD-110", precio: "190.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177031/WhatsApp_Video_2026-06-09_at_7.20.07_PM_h6xioo.mp4" },
+  { codigo: "DKG09000030", nombre: "VIA LED ZXD-33", precio: "205.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177031/WhatsApp_Video_2026-06-09_at_7.20.03_PM_gij90o.mp4" },
+  { codigo: "DKG01800529", nombre: "VIA LED RUNNING TL50 AM/AZ PUNTA DE LANZA", precio: "245.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177031/WhatsApp_Video_2026-06-09_at_7.19.19_PM_bxifer.mp4" },
+  { codigo: "DKG01800104", nombre: "VIA LED RACING ZXD-14", precio: "185.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177030/WhatsApp_Video_2026-06-09_at_7.19.03_PM_umspy1.mp4" },
+  { codigo: "DKG01800517", nombre: "VIA LED WKT-TL-26 AM/BLA TRIDENTE", precio: "210.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177030/WhatsApp_Video_2026-06-09_at_7.16.22_PM_ahaizb.mp4" },
+  { codigo: "DKG09000054", nombre: "VIA LED RUNNING ZXD-174", precio: "205.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177030/WhatsApp_Video_2026-06-09_at_7.17.11_PM_nllzvk.mp4" },
+  { codigo: "DKG01800530", nombre: "VIA LED RUNNING TL29 AM/AZ", precio: "215.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177030/WhatsApp_Video_2026-06-09_at_7.18.22_PM_ymz1ex.mp4" },
+  { codigo: "DKG09000036", nombre: "VIA LED AM/AZ RACING ZXD-97", precio: "175.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177030/WhatsApp_Video_2026-06-09_at_7.17.14_PM_vsgi2d.mp4" },
+  { codigo: "DKG09000029", nombre: "VIA LED AM/AZUL RACING ZXD-22", precio: "185.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785177029/WhatsApp_Video_2026-06-09_at_7.16.15_PM_dnajxx.mp4" },
+  { codigo: "DKG09000040", nombre: "VIA LED RUNNING MODELO ZXD-121", precio: "185.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785185114/WhatsApp_Video_2026-07-27_at_2.43.20_PM_rbq2t5.mp4" },
+  { codigo: "DKG010000022", nombre: "PROTECTOR DE MANO CON LUZ AMARILLA", precio: "550.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785176909/WhatsApp_Video_2026-06-09_at_7.14.35_PM_wkd90u.mp4" },
+  { codigo: "DKG010000022", nombre: "PROTECTOR DE MANO CON LUZ AMARILLA", precio: "550.00", stock: "Disponible", video: "https://res.cloudinary.com/dpsyqvyx/video/upload/v1785176909/WhatsApp_Video_2026-06-09_at_7.14.55_PM_kl2fju.mp4" }
+];
+
+/* =========================================================
+   CONFIGURA AQUÍ TUS CONTACTOS
+========================================================= */
+const WHATSAPP_NUMERO = "50487316974"; // código de país + número, sin + ni espacios
+const MESSENGER_USUARIO = "motoshophn"; // el @usuario o ID de tu página de Facebook
+
+function mensajePedido(producto){
+  return encodeURIComponent(`Hola, quiero ordenar: ${producto.nombre} (código ${producto.codigo})`);
+}
+
+const carousel = document.getElementById('carousel');
+const dotsWrap = document.getElementById('dots');
+
+productos.forEach((p, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+  slide.innerHTML = `
+    <video src="${p.video}" autoplay muted loop playsinline></video>
+    <div class="tag">
+      <div class="tag-card">
+        <div class="tag-hole"></div>
+        <div class="tag-top">
+          <span class="code-chip">${p.codigo}</span>
+          <span class="stock">${p.stock}</span>
+        </div>
+        <div class="name">${p.nombre}</div>
+        <div class="price-row">
+          <span class="price"><small>L</small>${p.precio}</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-wa" href="https://wa.me/${WHATSAPP_NUMERO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn btn-msg" href="https://m.me/${MESSENGER_USUARIO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 5-2.7-5.5 5.8z"/></svg>
+            Messenger
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+  carousel.appendChild(slide);
+
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dotsWrap.appendChild(dot);
+});
+
+// Progress dots + hide hint on first scroll
+const dots = document.querySelectorAll('.dot');
+const hint = document.getElementById('hint');
+let scrolled = false;
+carousel.addEventListener('scroll', () => {
+  if(!scrolled){ scrolled = true; hint.classList.add('hide'); }
+  const idx = Math.round(carousel.scrollTop / carousel.clientHeight);
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+}, { passive: true });
+
+// Pause videos not in view (ahorro de batería/datos)
+const videos = document.querySelectorAll('video');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    const v = e.target;
+    if(e.isIntersecting){ v.play().catch(()=>{}); } else { v.pause(); }
+  });
+}, { threshold: 0.6 });
+videos.forEach(v => io.observe(v));
+</script>
+
+</body>
+</html>
