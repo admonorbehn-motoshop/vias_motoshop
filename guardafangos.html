@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Catálogo · Guardafangos</title>
+
+<!-- Vista previa al compartir (WhatsApp, Messenger, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Catálogo · Guardafangos | Motoshop">
+<meta property="og:description" content="Guardafangos para moto, la mejor calidad y precio en Motoshop.">
+<meta property="og:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+<meta property="og:url" content="https://catalogo.motoshop-hn.com/guardafangos.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catálogo · Guardafangos | Motoshop">
+<meta name="twitter:description" content="Guardafangos para moto, la mejor calidad y precio en Motoshop.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #15171b;
+  --bg-deep: #05060a;
+  --panel: #0c0d10;
+  --steel: #9AA3AE;
+  --white: #F3F4F6;
+  --amber: #FF8A24;
+  --amber-dim: #B85F16;
+  --wa: #2FBF6E;
+  --msg: #4C8DFF;
+}
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ margin:0; padding:0; height:100%; background: var(--bg-deep); overscroll-behavior-y: contain; }
+body{ font-family: 'Inter', sans-serif; color: var(--white); }
+
+/* Top bar */
+.topbar{
+  position: fixed; top:0; left:0; right:0; z-index: 30;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 18px calc(14px + env(safe-area-inset-top)) 18px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  background: linear-gradient(to bottom, rgba(5,6,10,0.85), rgba(5,6,10,0));
+}
+.topbar .cat{
+  font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--steel);
+  border:1px solid rgba(154,163,174,0.35); padding: 4px 10px; border-radius: 999px;
+  background: rgba(16,18,21,0.5);
+}
+
+/* Carousel */
+.carousel{
+  height: 100dvh; width: 100%;
+  overflow-y: scroll; scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.slide{
+  position: relative; height: 100dvh; width: 100%;
+  scroll-snap-align: start; scroll-snap-stop: always;
+  display:flex; flex-direction: row;
+  overflow:hidden; background: var(--bg-deep);
+}
+
+/* Lado izquierdo: foto completa del producto */
+.slide-media{
+  position:relative; width: 58%; height:100%;
+  background: var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.slide-media .slide-bg{
+  position:absolute; inset:-20px; background-size:cover; background-position:center;
+  filter: blur(30px) brightness(0.4) saturate(1.15); transform: scale(1.1);
+}
+.slide-media img, .slide-media video{
+  position:relative; max-width:88%; max-height:82%;
+  width:auto; height:auto; object-fit: contain;
+  filter: drop-shadow(0 12px 34px rgba(0,0,0,0.55));
+  border-radius: 6px;
+}
+
+/* Lado derecho: info del producto */
+.slide-info{
+  width: 42%; height:100%; background: var(--panel);
+  border-left: 1px solid rgba(255,138,36,0.18);
+  display:flex; flex-direction:column; justify-content:center;
+  padding: 24px 26px; gap: 14px;
+}
+.info-top{ display:flex; align-items:center; justify-content:space-between; }
+.code-chip{
+  font-family:'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.03em;
+  color: var(--amber); background: rgba(255,138,36,0.1); border:1px solid rgba(255,138,36,0.35);
+  padding: 4px 10px; border-radius: 6px;
+}
+.stock{ font-size: 11.5px; color: var(--steel); font-family:'Inter'; }
+.name{
+  font-family:'Oswald', sans-serif; font-weight:600; font-size: 22px; line-height:1.25;
+  text-transform: uppercase; letter-spacing: 0.01em; color: var(--white);
+}
+.price-row{ display:flex; align-items:baseline; gap:4px; }
+.price{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size: 30px; color: var(--white); }
+.price small{ font-size: 14px; color: var(--steel); font-weight:500; }
+.actions{ display:flex; flex-direction:column; gap: 10px; margin-top: 6px; }
+.btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  padding: 13px 12px; border-radius: 10px; font-weight:600; font-size: 14px;
+  text-decoration:none; border: none; font-family:'Inter';
+}
+.btn-wa{ background: var(--wa); color: #06210f; }
+.btn-msg{ background: var(--msg); color: #06152f; }
+.btn svg{ width:17px; height:17px; flex-shrink:0; }
+
+/* Progress dots: barra horizontal arriba, centrada */
+.dots{
+  position: fixed; top: 10px; left:0; right:0; z-index: 30;
+  display:flex; justify-content:center; gap:6px; pointer-events:none;
+  padding-top: env(safe-area-inset-top);
+}
+.dot{ width:16px; height:4px; border-radius:3px; background: rgba(243,244,246,0.25); transition: all .25s ease; }
+.dot.active{ background: var(--amber); width: 24px; }
+
+.hint{
+  position: fixed; left:0; right:0; bottom: 10px; text-align:center; z-index: 25;
+  font-size: 11px; color: rgba(243,244,246,0.5); pointer-events:none;
+  font-family:'Inter'; letter-spacing: 0.02em;
+}
+.hint.hide{ opacity: 0; transition: opacity .6s ease; }
+
+/* En pantallas angostas (celular en vertical): apilar foto arriba, info abajo */
+@media (max-width: 760px){
+  .slide{ flex-direction: column; }
+  .slide-media{ width:100%; height:52%; }
+  .slide-info{
+    width:100%; height:48%;
+    border-left:none; border-top: 1px solid rgba(255,138,36,0.18);
+    padding: 18px 20px calc(18px + env(safe-area-inset-bottom)) 20px;
+    gap: 10px;
+  }
+  .name{ font-size: 19px; }
+  .price{ font-size: 26px; }
+  .actions{ flex-direction: row; }
+  .btn{ flex:1; padding: 12px 8px; font-size: 13.5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png" style="height:30px;width:auto;display:block;">
+  <div class="cat" id="catLabel">Guardafangos</div>
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="carousel" id="carousel"></div>
+<div class="hint" id="hint">↓ Desliza para ver más ↓</div>
+
+<script>
+/* =========================================================
+   PRODUCTOS
+   Para agregar uno nuevo, copia un bloque {...} y pégalo
+   dentro del arreglo. media = link directo a un .jpg/.png
+   o a un .mp4 (el script detecta el tipo automáticamente)
+========================================================= */
+const productos = [
+  { codigo: "DKF12000103", nombre: "GUARDAFANGO YBR125G DEL ED COMPLETO ROJO PZA", precio: "330.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051328/DKF12000103_qcabfz.jpg" },
+  { codigo: "DKF12000104", nombre: "GUARDAFANGO YBR125G DEL ED COMPLETO AZUL PZA", precio: "330.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051328/DKF12000104_bs5t7s.jpg" },
+  { codigo: "DKF12000107", nombre: "GUARDAFANGO DEL HJ125-7 GRIS", precio: "285.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051328/DKF12000107_ay5hlh.jpg" },
+  { codigo: "DKF16010040", nombre: "GUARDAFANGO DEL FT150-09 ROJO PZA", precio: "390.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051328/DKF16010040_l2xpsk.jpg" },
+  { codigo: "DKF16010095", nombre: "GUARDAFANGO DEL FT150-09 NEGRO/ROJO PZA", precio: "400.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051329/DKF16010095_ncf86q.jpg" },
+  { codigo: "DKF16010096", nombre: "GUARDAFANGO DEL FT150-09 AZUL PZA", precio: "370.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051329/DKF16010096_axa0pe.jpg" },
+  { codigo: "DKF16010114", nombre: "GUARDAFANGO DEL DM150 PZA", precio: "605.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051330/DKF16010114_hpqmuc.jpg" },
+  { codigo: "DKF16010177", nombre: "GUARDAFANGO DEL 150Z NEGRO/VERDE PZA L02/2021", precio: "410.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051330/DKF16010177_jsbuor.jpg" },
+  { codigo: "DKF16010180", nombre: "GUARDAFANGO DEL NEGRO ROJO 250Z", precio: "495.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051331/DKF16010180_c5ujwh.jpg" },
+  { codigo: "DKF16010224", nombre: "GUARDAFANGO DEL NEGRO ROJO 125Z", precio: "425.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051331/DKF16010224_b2nqbh.jpg" },
+  { codigo: "DKF16010273", nombre: "GUARDAFANGO DEL 150Z NEGRO/AZUL L PZA L02/2021", precio: "505.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051332/DKF16010273_xtxsli.jpg" },
+  { codigo: "DKF16200007", nombre: "GUARDAFANGO DEL GXT200B 2 ROJO PZA", precio: "400.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051333/DKF16200007_l5vmrz.jpg" },
+  { codigo: "DKF16200099", nombre: "GUARDAFANGO DEL GXT200 2 NEGRO PZA", precio: "400.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051333/DKF16200099_r0uy7b.jpg" },
+  { codigo: "DKF16500002", nombre: "GUARDAFANGO YBR125 DEL SIN PLACA PZA GRIS", precio: "420.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051334/DKF16500002_wcpecv.jpg" },
+  { codigo: "DKF16500005", nombre: "GUARDAFANGO DEL FZ16 AZUL", precio: "420.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051334/DKF16500005_im4yks.jpg" },
+  { codigo: "DKF16500006", nombre: "GUARDAFANGO DEL FZ16 NEGRO", precio: "420.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051335/DKF16500006_sk9j2i.jpg" },
+  { codigo: "DKF16500007", nombre: "GUARDAFANGO DEL FZ16 ROJO", precio: "465.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051335/DKF16500007_kpurss.jpg" },
+  { codigo: "DKG01800345", nombre: "GUARDAFANGO DE LUJO NEGRO", precio: "320.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051336/DKG01800345-346-347_hjj5u3.jpg" },
+  { codigo: "DKG01800346", nombre: "GUARDAFANGO DE LUJO AZUL", precio: "320.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051336/DKG01800345-346-347_hjj5u3.jpg" },
+  { codigo: "DKG01800347", nombre: "GUARDAFANGO DE LUJO ROJO", precio: "320.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051336/DKG01800345-346-347_hjj5u3.jpg" },
+  { codigo: "DKG01800351", nombre: "GUARDAFANGO DEL YAMAHA YZ NEGRO", precio: "410.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051336/DKG01800351_bz3bcq.jpg" },
+  { codigo: "KMSDLZX2L0006", nombre: "GUARDAFANGO DELANTERO NEGRO ZX150L/ZX200L M.N KMS", precio: "430.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786051337/KMSDLZX2L0006_eczox7.jpg" }
+];
+
+/* =========================================================
+   CONFIGURA AQUÍ TUS CONTACTOS
+========================================================= */
+const WHATSAPP_NUMERO = "50487316974"; // código de país + número, sin + ni espacios
+const MESSENGER_USUARIO = "motoshophn"; // el @usuario o ID de tu página de Facebook
+
+function mensajePedido(producto){
+  return encodeURIComponent(`Hola, quiero ordenar: ${producto.nombre} (código ${producto.codigo})`);
+}
+
+function esVideo(url){
+  return /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
+}
+
+const carousel = document.getElementById('carousel');
+const dotsWrap = document.getElementById('dots');
+
+productos.forEach((p, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+
+  const mediaTag = esVideo(p.media)
+    ? `<div class="slide-bg" style="background-image:url('${p.media}')"></div><video src="${p.media}" autoplay muted loop playsinline></video>`
+    : `<div class="slide-bg" style="background-image:url('${p.media}')"></div><img src="${p.media}" alt="${p.nombre}" loading="lazy">`;
+
+  slide.innerHTML = `
+    <div class="slide-media">
+      ${mediaTag}
+    </div>
+    <div class="slide-info">
+      <div class="info-top">
+        <span class="code-chip">${p.codigo}</span>
+        <span class="stock">${p.stock}</span>
+      </div>
+      <div class="name">${p.nombre}</div>
+      <div class="price-row">
+        <span class="price"><small>L</small>${p.precio}</span>
+      </div>
+      <div class="actions">
+        <a class="btn btn-wa" href="https://wa.me/${WHATSAPP_NUMERO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-msg" href="https://m.me/${MESSENGER_USUARIO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 5-2.7-5.5 5.8z"/></svg>
+          Messenger
+        </a>
+      </div>
+    </div>
+  `;
+  carousel.appendChild(slide);
+
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dotsWrap.appendChild(dot);
+});
+
+// Progress dots + hide hint on first scroll
+const dots = document.querySelectorAll('.dot');
+const hint = document.getElementById('hint');
+let scrolled = false;
+carousel.addEventListener('scroll', () => {
+  if(!scrolled){ scrolled = true; hint.classList.add('hide'); }
+  const idx = Math.round(carousel.scrollTop / carousel.clientHeight);
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+}, { passive: true });
+
+// Pause videos not in view (ahorro de batería/datos)
+const videos = document.querySelectorAll('video');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    const v = e.target;
+    if(e.isIntersecting){ v.play().catch(()=>{}); } else { v.pause(); }
+  });
+}, { threshold: 0.6 });
+videos.forEach(v => io.observe(v));
+</script>
+
+</body>
+</html>
