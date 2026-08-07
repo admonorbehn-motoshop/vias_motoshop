@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Catálogo · Carenas</title>
+
+<!-- Vista previa al compartir (WhatsApp, Messenger, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Catálogo · Carenas | Motoshop">
+<meta property="og:description" content="Carenas y faros para moto, la mejor calidad y precio en Motoshop.">
+<meta property="og:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+<meta property="og:url" content="https://catalogo.motoshop-hn.com/carenas.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catálogo · Carenas | Motoshop">
+<meta name="twitter:description" content="Carenas y faros para moto, la mejor calidad y precio en Motoshop.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #101215;
+  --bg-deep: #05060a;
+  --panel: #0e1013;
+  --steel: #9AA3AE;
+  --white: #F3F4F6;
+  --amber: #FF8A24;
+  --amber-dim: #B85F16;
+  --wa: #2FBF6E;
+  --msg: #4C8DFF;
+}
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ margin:0; padding:0; background: var(--bg-deep); }
+body{ font-family: 'Inter', sans-serif; color: var(--white); min-height:100dvh; }
+
+/* Top bar */
+.topbar{
+  position: sticky; top:0; z-index: 30;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 20px calc(14px + env(safe-area-inset-top)) 20px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  background: rgba(5,6,10,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,138,36,0.18);
+}
+.topbar img{ height: 30px; width:auto; display:block; }
+.topbar .cat{
+  font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--steel);
+  border:1px solid rgba(154,163,174,0.35); padding: 4px 10px; border-radius: 999px;
+  background: rgba(16,18,21,0.5);
+}
+
+/* Header text */
+.header{ padding: 26px 20px 6px 20px; }
+.header h1{
+  font-family:'Oswald', sans-serif; font-weight:700; text-transform: uppercase;
+  letter-spacing: 0.02em; font-size: 22px; margin:0 0 4px 0; color: var(--white);
+}
+.header h1 span{ color: var(--amber); }
+.header p{ margin:0; color: var(--steel); font-size: 13px; }
+
+/* Grid */
+.grid{
+  display:grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  padding: 18px 20px calc(40px + env(safe-area-inset-bottom)) 20px;
+}
+
+/* Card */
+.card{
+  background: var(--panel);
+  border: 1px solid rgba(255,138,36,0.16);
+  border-radius: 14px;
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.card:hover{ border-color: rgba(255,138,36,0.4); }
+
+.card-media{
+  position:relative; width:100%; aspect-ratio: 1 / 1;
+  background: var(--bg); overflow:hidden;
+}
+.card-media .bg{
+  position:absolute; inset:-15px; background-size:cover; background-position:center;
+  filter: blur(22px) brightness(0.42) saturate(1.15); transform: scale(1.1);
+}
+.card-media img{
+  position:relative; width:100%; height:100%; object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+  padding: 10px;
+}
+
+.card-body{ padding: 14px 14px 16px 14px; display:flex; flex-direction:column; gap:9px; flex:1; }
+.card-top{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.code-chip{
+  font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.02em;
+  color: var(--amber); background: rgba(255,138,36,0.1); border:1px solid rgba(255,138,36,0.35);
+  padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+}
+.stock{ font-size: 10.5px; color: var(--steel); white-space: nowrap; }
+.name{
+  font-family:'Oswald', sans-serif; font-weight:600; font-size: 14.5px; line-height:1.3;
+  text-transform: uppercase; color: var(--white); min-height: 37px;
+}
+.price{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size: 20px; color: var(--white); }
+.price small{ font-size: 11px; color: var(--steel); font-weight:500; margin-right: 2px; }
+
+.actions{ display:flex; gap: 8px; margin-top: 2px; }
+.btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+  padding: 9px 6px; border-radius: 8px; font-weight:600; font-size: 12px;
+  text-decoration:none; border: none; font-family:'Inter';
+}
+.btn-wa{ background: var(--wa); color: #06210f; }
+.btn-msg{ background: var(--msg); color: #06152f; }
+.btn svg{ width:14px; height:14px; flex-shrink:0; }
+
+@media (max-width: 420px){
+  .grid{ grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 14px 14px 30px 14px; }
+  .name{ font-size: 13px; min-height: 34px; }
+  .price{ font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="https://res.cloudinary.com/dpsyqvyx/image/upload/v1785177568/MOTOSHOP_LOGO_pbgqx1.png" alt="Motoshop">
+  <div class="cat">Carenas</div>
+</div>
+
+<div class="header">
+  <h1>Catálogo · <span>Carenas</span></h1>
+  <p>Toca WhatsApp o Messenger para ordenar cualquier pieza.</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+/* =========================================================
+   PRODUCTOS
+   Para agregar uno nuevo, copia un bloque {...} y pégalo
+   dentro del arreglo.
+========================================================= */
+const productos = [
+  { codigo: "DKF09010010", nombre: "CARENA CON FARO COMPLETO 150Z/150SZ", precio: "1200.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063785/DKF09010010_nuxjv6.jpg" },
+  { codigo: "DKF13000101", nombre: "CARENA HJ125 GRIS", precio: "405.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063785/DKF13000101_bap7gw.jpg" },
+  { codigo: "DKF13000103", nombre: "CARENA HJ125 ROJA", precio: "405.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063786/DKF13000103_kpy6l2.jpg" },
+  { codigo: "DKF13010073", nombre: "CARENA PULSAR 180 AZUL", precio: "425.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063786/DKF13010073_kkrhbm.jpg" },
+  { codigo: "DKF13010074", nombre: "CARENA PULSAR 180 NEGRO", precio: "425.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063787/DKF13010074_acgvc7.jpg" },
+  { codigo: "DKNF13000139", nombre: "CARENA XM200Z NEGRA", precio: "480.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063788/DKNF13000139_beejef.jpg" },
+  { codigo: "F09010074", nombre: "CONJUNTO DE FARO CON LEDS 250Z", precio: "1200.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063789/F09010074_mvy3mz.jpg" },
+  { codigo: "F13011576", nombre: "CUBIERTA FR ROJO NEGRO 250Z NEGRA", precio: "750.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063790/F13011576_ixooft.jpg" },
+  { codigo: "F13011844", nombre: "CUBIERTA DE FARO ROJO BLANCO FT150GTS", precio: "850.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063791/F13011844_utxs9b.jpg" },
+  { codigo: "F13012738", nombre: "CUBIERTA DE FARO NEGRO ROJO 125Z", precio: "950.00", stock: "Disponible", media: "https://res.cloudinary.com/dpsyqvyx/image/upload/v1786063792/F13012738_e8gw1a.jpg" }
+];
+
+/* =========================================================
+   CONFIGURA AQUÍ TUS CONTACTOS
+========================================================= */
+const WHATSAPP_NUMERO = "50487316974";
+const MESSENGER_USUARIO = "motoshophn";
+
+function mensajePedido(producto){
+  return encodeURIComponent(`Hola, quiero ordenar: ${producto.nombre} (código ${producto.codigo})`);
+}
+
+const grid = document.getElementById('grid');
+
+productos.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-media">
+      <div class="bg" style="background-image:url('${p.media}')"></div>
+      <img src="${p.media}" alt="${p.nombre}" loading="lazy">
+    </div>
+    <div class="card-body">
+      <div class="card-top">
+        <span class="code-chip">${p.codigo}</span>
+        <span class="stock">${p.stock}</span>
+      </div>
+      <div class="name">${p.nombre}</div>
+      <div class="price"><small>L</small>${p.precio}</div>
+      <div class="actions">
+        <a class="btn btn-wa" href="https://wa.me/${WHATSAPP_NUMERO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-msg" href="https://m.me/${MESSENGER_USUARIO}?text=${mensajePedido(p)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 5-2.7-5.5 5.8z"/></svg>
+          Messenger
+        </a>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>
